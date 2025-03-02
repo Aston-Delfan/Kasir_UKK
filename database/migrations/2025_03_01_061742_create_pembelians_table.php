@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('pembelian', function (Blueprint $table) {
             $table->id('pembelian_id');
             $table->date('tanggal_pembelian');
-            $table->decimal('total_harga', 10, 2);
+            $table->decimal('total_harga', 10, 2)
+                  ->nullable();
             $table->foreignId('supplier_id')
                   ->constrained('suppliers');
             $table->timestamps();

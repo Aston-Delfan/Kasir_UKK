@@ -2,15 +2,28 @@
 
 namespace App\Filament\Resources\PembelianResource\Pages;
 
-use App\Filament\Resources\PembelianResource;
 use Filament\Actions;
+use Filament\Actions\Action;
 use Filament\Resources\Pages\CreateRecord;
+use App\Filament\Resources\PembelianResource;
 
 class CreatePembelian extends CreateRecord
 {
     protected static string $resource = PembelianResource::class;
+
+    protected function getFormActions(): array
+    {
+        return [
+            Action::make('create')
+            ->label(__('Selanjutnya'))
+            ->submit('create')
+            ->keyBindings(['mod+s']),
+        ];
+    }
+
     protected function getRedirectUrl(): string
     {
-        return $this->getResource()::getUrl('index');
+        $id = $this->record->id;
+        return route('filament.admin.resources.detail-pembelians.create',['pembelian_id' => $id]);
     }
 }
